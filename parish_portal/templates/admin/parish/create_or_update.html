@@ -1,0 +1,129 @@
+{% extends 'layouts/base_create.html' %}
+{% load static %}
+
+{% block heading %}
+{{ roles.id|yesno:"Edit Parish,Add Parish" }}
+{% endblock %}
+
+{% block sub-heading %}{{ roles.id|yesno:"Edit Parish Details,Add Parish Details" }}{% endblock %}
+
+{% block form %}
+<form class="bg-white pl-6 pr-56 py-10" id="create-or-update-roles-form" data-redirect-url="">
+    <input type="hidden" name="role_id" value="{{  roles.id  }}">
+        <!-- Form Fields -->
+        <div class="flex flex-col gap-y-10 gap-x-6 mb-4">
+            <!-- Priest Details -->
+            <div class="flex justify-between gap-x-20">
+                <div class="basis-1/5">
+                    <h2 class="text-zinc-800 font-medium text-base mb-4">Parish Details</h2>
+                </div>
+                <div class="basis-4/5 w-full">
+                    <div class="mb-6">
+                        <label for="role-name" class="block text-gray-800 font-normal text-sm mb-1">Parish Name
+                            <span class="required-asterisk">*</span></label>
+                        <input type="text" id="role_name" value="{{ roles.name|default_if_none:'' }}"
+                            name="role_name" {% if not roles.id %}autofocus {% endif %} class="w-full border-gray-300 border rounded px-3 py-2"
+                            placeholder="Enter Role Name">
+                    </div>
+                    <div class="mb-6">
+                        <label for="zipcode" class="block text-gray-800 font-normal text-sm mb-1">Select Forane<span
+                            class="required-asterisk">*</span></label>
+                    <select id="role_category" name="role_category"
+                        class="w-full border-gray-300 border rounded px-3 py-2 bg-white">
+
+                        <option value="">Select Forane</option>
+                        <option value="RDA" {% if roles.category == "RDA" %} selected {% endif %}>Forane 1</option>
+                        <option value="DFI" {% if roles.category == "DFI" %} selected {% endif %}>Forane 2</option>
+                        <option value="OM" {% if roles.category == "OM" %} selected {% endif %}>Forane 3</option>
+
+                    </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="zipcode" class="block text-gray-800 font-normal text-sm mb-1">Select Priest<span
+                            class="required-asterisk">*</span></label>
+                    <select id="role_category" name="role_category"
+                        class="w-full border-gray-300 border rounded px-3 py-2 bg-white">
+
+                        <option value="">Select Priest</option>
+                        <option value="RDA" {% if roles.category == "RDA" %} selected {% endif %}>Priest 1</option>
+                        <option value="DFI" {% if roles.category == "DFI" %} selected {% endif %}>Priest 2</option>
+                        <option value="OM" {% if roles.category == "OM" %} selected {% endif %}>Priest 3</option>
+
+                    </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="address" class="block text-gray-800 font-normal text-sm mb-1">Address<span
+                          class="required-asterisk">*</span></label>
+                        <textarea id="address" name="address" class="w-full border-gray-300 border rounded px-3 py-2"
+                          placeholder="Enter Address">{{ organization.address|default_if_none:'' }}</textarea>
+                      </div>
+                    <div class="flex gap-x-5">
+                        <div class="mb-6 basis-3/6">
+                            <label for="contact_person_number" class="block text-gray-800 font-normal text-sm mb-1">
+                                Parish Contact Number</label>
+                            <input type="text" id="contact_person_number"
+                                value="{{ officelocation.contact_person_number|default_if_none:'' }}"
+                                name="contact_person_number" class="w-full border-gray-300 border rounded px-3 py-2"
+                                placeholder="Enter contact number">
+                        </div>
+                        <div class="mb-6 basis-3/6">
+                            <label for="contact_person_email" class="block text-gray-800 font-normal text-sm mb-1">
+                                Parish Email</label>
+                            <input type="email" id="contact_person_email"
+                                value="{{ officelocation.contact_person_email|default_if_none:'' }}"
+                                name="contact_person_email" class="w-full border-gray-300 border rounded px-3 py-2"
+                                placeholder="Enter contact email">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Visibility & Status -->
+            <div class="flex justify-between gap-x-20">
+                <div class="basis-1/5">
+                    <h2 class="text-zinc-800 font-medium text-base mb-4">Visibility</h2>
+                </div>
+                <div class="basis-4/5 w-full">
+                    <div class="flex gap-x-5">
+                        <div class="flex items-center mb-4">
+                            <label for="status" class="block text-zinc-950 font-normal text-sm mr-6">Mark Status as
+                                Active</label>
+                            <input type="checkbox" id="status" class="toggle-checkbox hidden" {% if officelocation.id %}
+                                {% if officelocation.status == 'Active' %} 
+                                    checked 
+                                {% endif %}
+                            {% else %}
+                                checked 
+                            {% endif %}>
+                            <label for="status" class="toggle-label">
+                                <div class="toggle-inner"></div>
+                                <div class="toggle-switch"></div>
+                            </label>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    <!-- Buttons -->
+    <div class="flex justify-start gap-4 mt-14">
+        <a href="" class="btn-blue-outlined">
+            Cancel
+        </a>
+        <button id="create-or-update-roles-submit" type="button" class="btn-blue">
+            {{ roles.id|yesno:"Update Parish,Save Parish" }}
+        </button>
+    </div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+    var api_config = {
+        "create_or_update_from": "{% url 'users:roles.create' %}",
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+    }
+</script>
+<script src="{% static 'js/custom/pages/superadmin/users/roles/create_or_update.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

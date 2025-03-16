@@ -1,0 +1,58 @@
+{% extends 'layouts/base_list.html' %} {% load static %} {% block heading %}
+Family Unit {% endblock %}
+
+<!-- Custom Search Button -->
+{% block table-search %}
+<div class="custom-search-container"></div>
+{% endblock %}
+
+<!-- Add new Button -->
+{% block addbutton %}
+<a href="{% url 'family_unit:family_unit.create' %}" class="btn-blue flex">
+  <span class="mr-2">Add New Family Unit</span>
+  <svg class="w-5 h-5 text-white">
+    <use href="{% static 'images/plus_icon.svg' %}#plusIcon"></use>
+  </svg>
+</a>
+{% endblock %}
+
+<!-- Total count -->
+{% block total-count %}
+<div class="font-medium text-base">
+  Total Family Unit<span id="total-categories">
+    ({{ count_observations }})</span
+  >
+</div>
+{% endblock %}
+
+<!-- Table actions -->
+{% block table-actions %} 
+{% include 'layouts/partials/table-actions.html' %} 
+{% endblock %}
+
+<!-- Table -->
+<div class="mt-4">
+  {% block table %} {% include 'admin/family_unit/partials/table.html' %} {% endblock %}
+</div>
+
+<!-- Selected Rows Count -->
+{% block selected %} <span id="selectedCount">0 row(s) selected.</span> 
+{% endblock %} {% block script %}
+<script>
+  var api_config = {
+    datatable: "{% url 'observations:load.observation.datatable' %}",
+    csrfmiddlewaretoken: "{{ csrf_token }}",
+    delete_records: "{% url 'observations:observation.records.destroy' %}",
+    edit_url: "{% url 'observations:observation.update' '0' %}",
+    status_change: "{% url 'observations:observation.status.change' %}",
+    edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
+    delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
+    search_icon: "{% static 'images/search_icon.svg' %}",
+    view_profile: "{% url 'observations:observation.profile' '0' %}",
+    item: "Observation",
+  };
+</script>
+<script src="{% static 'js/custom/pages/superadmin/observations/observations/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+
+<script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

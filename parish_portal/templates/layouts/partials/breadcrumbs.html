@@ -1,0 +1,35 @@
+{% load static%}
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar">
+  <!--begin::Toolbar container-->
+  <div
+    id="kt_app_toolbar_container"
+    class="app-container container-xxl d-flex flex-stack"
+  >
+    <!--begin::Page title-->
+
+    <nav class="pb-4 text-zinc-500 font-normal text-sm">
+      <ol class="flex items-center last:">
+        {% for breadcrumb in breadcrumbs %}
+        <li>
+          <a
+            class="font-normal {% if forloop.last %}text-zinc-950 {% else %}text-dark {% endif %}"
+            href="{{ breadcrumb.route }}"
+            >{{ breadcrumb.name }}</a
+          >
+        </li>
+        {% if not forloop.last %}
+        <li>
+          <img
+            src="{% static 'images/breadcrumbs_icon.svg' %}"
+            alt="Arrow"
+            class="h-[14px] mx-[6px]"
+          />
+        </li>
+        {% endif %} {% endfor %}
+      </ol>
+    </nav>
+  </div>
+  <!--end::Toolbar container-->
+</div>
+<!--end::Toolbar-->

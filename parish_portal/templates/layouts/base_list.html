@@ -1,0 +1,40 @@
+{% extends 'layouts/apps.html' %}
+{% load static %}
+
+<!-- List page layout -->
+{% block content %}
+<!-- Breadcrumb -->
+{% include 'layouts/partials/breadcrumbs.html' %}
+
+{% block profile-section %} {% endblock %}
+
+<h1>
+  {% block heading %} {% endblock %}
+</h1>
+
+<!-- Table actions -->
+<div class="mt-6 flex justify-between items-center">
+  <!-- Custom Search Button -->
+  {% block table-search %} {% endblock %}
+  <!-- Add new Button -->
+  {% block addbutton %} {% endblock %}
+</div>
+<div class="my-4 flex justify-between items-center">
+  <!-- Total count -->
+  {% block total-count %} {% endblock %}
+  <!-- Table actions -->
+  <div class="flex items-center gap-x-3">
+    {% block table-actions %} {% endblock %}
+  </div>
+</div>
+
+<!-- Table -->
+<div class="datatable mt-4">
+  {% block table %} {% endblock %}
+</div>
+
+<!-- Selected Rows Count -->
+<div class="-mt-14 text-sm text-zinc-600">
+  {% block selected %} {% endblock %}
+</div>
+{% endblock content %}

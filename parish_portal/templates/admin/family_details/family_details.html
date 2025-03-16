@@ -1,0 +1,59 @@
+{% extends 'layouts/base_list.html' %} {% load static %} {% block heading %}
+Family {% endblock %}
+
+<!-- Custom Search Button -->
+{% block table-search %}
+<div class="checklist-datatable-search-container"></div>
+{% endblock %}
+
+<!-- Add new Button -->
+{% block addbutton %}
+<a
+  href="{% url 'family_details:family_details.create' %}"
+  class="btn-blue flex"
+>
+  <span class="mr-2">Add New Family</span>
+  <svg class="w-5 h-5 text-white">
+    <use href="{% static 'images/plus_icon.svg' %}#plusIcon"></use>
+  </svg>
+</a>
+{% endblock %}
+
+<!-- Total count -->
+{% block total-count %}
+<div class="font-medium text-base">
+  Total Family (<span id="total-checklist-templates">{{ count_checklist }}</span
+  >)
+</div>
+{% endblock %}
+
+<!-- Table actions -->
+{% block table-actions %} {% include 'layouts/partials/table-actions.html' %} {% endblock %}
+
+<!-- Table -->
+<div class="mt-4">
+  {% block table %} {% include 'admin/family_details/partials/table.html' %} {% endblock %}
+</div>
+
+{% block script %}
+
+<script>
+  var api_config = {
+    datatable: "{% url 'observations:checklist:load.checklist.datatable' %}",
+    csrfmiddlewaretoken: "{{ csrf_token }}",
+    delete_records:
+      "{% url 'observations:checklist:checklist.records.destroy' %}",
+    copy_records: "{% url 'sequence:sequence.copy' %}",
+    edit_url: "{% url 'observations:checklist:checklist.update' '0' %}",
+    status_change: "{% url 'observations:checklist:checklist.status.change' %}",
+    edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
+    copy_icon: "{% static 'images/copy_icon.svg' %}#CopyIcon",
+    delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
+    search_icon: "{% static 'images/search_icon.svg' %}",
+    view_profile: "{% url 'observations:checklist:checklist.profile' '0' %}",
+    item: "Checklist",
+  };
+</script>
+<script src="{% static 'js/custom/pages/superadmin/observations/checklist/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

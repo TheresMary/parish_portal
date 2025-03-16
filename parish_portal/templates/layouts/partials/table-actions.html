@@ -1,0 +1,149 @@
+{% load static %}
+
+<!-- Status dropdown -->
+<div class="relative">
+  <button
+    id="dropdownStatus"
+    class="flex items-center px-4 py-2 bg-white font-normal text-sm text-gray-500 border border-zinc-200 rounded-t-lg focus:outline-none"
+  >
+    <img
+      src="{% static 'images/select_icon.svg' %}"
+      alt="Add Icon"
+      class="w-4 h-4 mr-2.5"
+    />
+    Status: &nbsp; <span class="capitalize">Select</span>
+  </button>
+  <!-- Status dropdown Menu -->
+  <div
+    id="dropdownStatusMenu"
+    class="hidden absolute right-0 w-34 bg-white rounded-b-lg z-50 border-x border-b border-zinc-200"
+  >
+    <form id="statusForm" class="">
+      <!-- Active Radio Button -->
+      <div class="flex items-center py-3 px-5">
+        <input
+          id="active"
+          type="radio"
+          name="status"
+          value="active"
+          class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <label for="active" class="ml-2 block text-gray-700 text-sm"
+          >Active</label
+        >
+      </div>
+      <!-- Inactive Radio Button -->
+      <div class="flex items-center py-3 px-5">
+        <input
+          id="inactive"
+          type="radio"
+          name="status"
+          value="inactive"
+          class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <label for="inactive" class="ml-2 block text-gray-700 text-sm"
+          >Inactive</label
+        >
+      </div>
+      <!-- Clear Filter Button -->
+      <button
+        type="reset"
+        data-groups-filter="clearstatus"
+        class="w-full flex items-center text-gray-700 rounded-b-lg py-3 px-5 border-t border-t-zinc-100"
+      >
+        <img
+          src="{% static 'images/cross.svg' %}"
+          alt="Add Icon"
+          class="mr-2.5 w-3 h-3"
+        />
+        Clear Filter
+      </button>
+    </form>
+  </div>
+</div>
+<!-- Sort By dropdown -->
+<div class="relative">
+  <button
+    id="dropdownSort"
+    class="flex items-center px-4 py-2 bg-white font-normal text-sm text-gray-500 border border-zinc-200 rounded-lg focus:outline-none"
+  >
+    <img
+      src="{% static 'images/select_icon.svg' %}"
+      alt="Add Icon"
+      class="w-4 h-4 mr-2.5"
+    />
+    Sort by: &nbsp; <span class="sort-option text-zinc-950"> Name</span>
+  </button>
+  <!-- Sortby dropdown Menu -->
+  <div
+    id="dropdownSortMenu"
+    class="hidden absolute right-0 w-48 bg-white rounded-lg shadow-lg z-15"
+  >
+    <form id="sortForm" class="py-2 px-4 space-y-5">
+      <!-- Last Added Radio Button -->
+      <div class="flex items-center mb-2">
+        <input
+          id="created_date"
+          type="radio"
+          name="sort"
+          value="Last Added"
+          class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <label for="created_date" class="ml-2 block text-gray-700 text-sm"
+          >Last Added</label
+        >
+      </div>
+
+      <!-- Clear Filter Button -->
+      <button
+        type="reset"
+        data-groups-filter="clearsort"
+        class="w-full flex items-center text-gray-700 rounded-lg"
+      >
+        <img
+          src="{% static 'images/close_button.png' %}"
+          alt="Add Icon"
+          class="mr-2.5"
+        />
+        Clear Filter
+      </button>
+    </form>
+  </div>
+</div>
+{% block filter %}{% endblock filter %}
+<!-- 3 dots dropdown -->
+<div class="relative">
+  <button id="kebabMenuButton" class="flex items-center p-2">
+    <img src="{% static 'images/three_dots.svg' %}" alt="More Actions" />
+  </button>
+  <!-- 3 dots dropdown Menu -->
+  <div
+    id="kebabMenu"
+    class="hidden absolute right-0 w-48 bg-white rounded-lg shadow-lg z-50 mt-1.5 p-4 space-y-4"
+  >
+    <button
+      type="button"
+      id="setActive"
+      name="statusChange"
+      class="w-full flex items-center text-gray-700 text-sm"
+    >
+      Mark as active
+    </button>
+    <button
+      type="button"
+      id="setInactive"
+      name="statusChange"
+      class="w-full flex items-center text-gray-700 text-sm"
+    >
+      Mark as inactive
+    </button>
+    <button
+      type="button"
+      id="deleteRows"
+      name="statusChange"
+      class="w-full flex items-center text-gray-700 text-sm"
+    >
+      Delete selected rows
+    </button>
+  </div>
+</div>

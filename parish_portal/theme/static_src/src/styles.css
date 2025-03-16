@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset Styles */
+
+@layer base {
+  h1 {
+    @apply font-semibold;
+    @apply text-xl;
+    @apply text-zinc-950;
+  }
+
+  form {
+    @apply m-0;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-blue {
+    @apply flex border border-blue-500 bg-blue-500 hover:border-blue-700 hover:bg-blue-700 text-white text-sm font-normal py-2 px-4 rounded disabled:bg-gray-200 disabled:border-gray-200 disabled:text-gray-500;
+  }
+
+  .btn-blue-outlined {
+    @apply flex border border-blue-500 text-blue-500 hover:border-blue-700 hover:text-blue-700 text-sm font-normal py-2 px-4 rounded;
+  }
+
+  .btn-red {
+    @apply bg-red hover:bg-red-700 text-white text-sm font-normal py-2 px-4 rounded;
+  }
+  
+  /* Login error messages */
+  .fv-plugins-message-container.invalid-feedback div{
+    @apply text-red text-xs;
+  }
+
+  #_sign_in_form #swal2-html-container{
+    @apply text-red text-sm m-auto;
+  }
+
+  #_sign_in_form .swal2-confirm{
+    display: none !important;
+  }
+
+  /* Sidenav styles */
+  .menu-text {
+    @apply whitespace-nowrap overflow-hidden truncate transition-opacity duration-300 ease-in-out;
+  }
+
+  #sidenav-links .active{
+    @apply bg-blue-100 text-blue-500
+  }
+
+  #sidenav-links .active svg{
+    @apply text-blue-500
+  }
+
+  /* Datatable Pagination */
+  .datatable .pagination {
+    @apply flex gap-x-3;
+  }
+
+  .datatable .pagination a{
+    @apply rounded-md text-sm font-medium cursor-default;
+  }
+
+  .datatable .pagination a:not([aria-disabled="true"]){
+    @apply text-zinc-500;
+  }
+
+  .datatable .pagination a:not([aria-disabled="true"]):hover {
+    @apply text-blue-500 cursor-pointer;
+  }
+
+  .datatable .dt-length select{
+    @apply bg-white w-[66px] px-3 py-2;
+  }
+
+  .datatable .dt-length select option{
+    @apply text-black-dark text-sm font-medium;
+  }
+
+  .datatable .dt-length select:focus-visible{
+    border: 1px solid black !important;
+    outline: none !important;
+  }
+
+  /* Datatable actions */
+  #dropdownStatusMenu + #dropdownStatus {
+    @apply !bg-teal-200;
+  }
+
+  #dropdownStatus, #dropdownStatusMenu{
+    @apply min-w-[160px];
+  }
+
+  #dropdownStatusMenu button{
+    @apply text-sm;
+  }
+
+  .datatable .dt-orderable-desc{
+    @apply hover:!outline-none;
+  }
+
+  #dropdownSort, #dropdownSortMenu{
+    @apply min-w-[188px]
+  }
+
+  /* Delete popup styles */
+  .delete-popup-container{
+    @apply fixed top-0 left-0 w-full h-full bg-black-dark/50 flex justify-center items-center z-50;
+  }
+  
+  .delete-popup-container .swal2-popup{
+    @apply max-w-[450px] bg-white rounded-lg p-12 shadow-lg;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .delete-popup-container .swal2-actions{
+    @apply flex-row-reverse justify-center gap-x-[18px];
+  }
+
+  .delete-popup-container .swal2-actions button{
+    @apply w-[150px] flex justify-center items-center gap-2.5 py-2 px-7 mt-6 rounded-md;
+  }
+
+  .delete-popup-container .swal2-confirm {
+    @apply bg-[#dc2626] text-white;
+  }
+
+  .delete-popup-container .swal2-deny {
+    display: none !important;
+  }
+  
+  .delete-popup-container .swal2-cancel {
+    @apply border border-slate-200;
+  }
+  
+  .custom-popup-container .swal2-popup{
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* Toast Messages style */
+  .swal2-container:has(.custom-toast) {
+    @apply fixed top-11 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-auto bg-none flex justify-center items-center z-toast m-auto;
+  }
+
+  .custom-toast .swal2-html-container{
+    @apply m-auto;
+  }
+  
+  /* Toggle Button CSS*/
+  .toggle-label {
+    @apply relative flex items-center cursor-pointer;
+  }
+
+  .toggle-inner {
+    @apply w-[50px] h-[26px] bg-gray-400 rounded-full shadow-inner;
+  }
+
+  .toggle-switch {
+    @apply absolute top-[4px] left-[4px] h-[18px] w-[18px] bg-white transform transition-transform ease-in-out duration-300 rounded-full shadow;
+  }
+
+  .toggle-checkbox:checked + .toggle-label .toggle-inner {
+    @apply bg-blue-600;
+  }
+
+  .toggle-checkbox:checked + .toggle-label .toggle-switch {
+    @apply translate-x-[24px];
+  }
+
+  #learning-material-profile > iframe{
+    @apply w-full h-[400px] rounded-lg;
+  }
+
+  .collapsed ~ .main-content #lm-pagination .pagination{
+    @apply w-[calc(100vw-80px)] ml-[80px];
+  }
+
+  .dt-search {
+    @apply hidden;;
+  }
+
+  /* Custom scroll bar */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-zinc-200 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-zinc-400 rounded-full;
+  }
+}
+
+@layer utilities {
+  .datatable .dt-length select {
+    @apply appearance-none bg-no-repeat bg-right bg-[position:right_1rem_center] bg-[length:6px] cursor-pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.191373 2.79059C0.00391725 2.97804 0.00391725 3.28196 0.191373 3.46941C0.378829 3.65686 0.682744 3.65686 0.8702 3.46941L2.93079 1.40882L4.99137 3.46941C5.17883 3.65686 5.48274 3.65686 5.67021 3.46941C5.85762 3.28196 5.85762 2.97804 5.67021 2.79059L3.2702 0.390587C3.18017 0.300571 3.05808 0.25 2.93079 0.25C2.80348 0.25 2.68139 0.300571 2.59137 0.390587L0.191373 2.79059ZM5.67021 7.20275C5.85762 7.01529 5.85762 6.71138 5.67021 6.52392C5.48274 6.33648 5.17883 6.33648 4.99137 6.52392L2.93079 8.58452L0.8702 6.52392C0.682744 6.33648 0.378829 6.33648 0.191373 6.52392C0.00391725 6.71138 0.00391725 7.01529 0.191373 7.20275L2.59137 9.60276C2.77883 9.79017 3.08274 9.79017 3.2702 9.60276L5.67021 7.20275Z" fill="%2309090B"/></svg>');
+  }
+}
+
+.dt-empty{
+  text-align: center;
+}
+
+.delete-popup-container .swal2-actions >.swal2-loader{
+  display: none !important;
+}
+
+/* Required fields in form */
+.required-asterisk {
+  color: red;
+}
+
+.delete-wide {
+  max-width: 530px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hide elements initially */
+.swal2-popup > * {
+    display: none;
+}
+
+/* Dropdown header */
+#header-dropdown-icon, #sidenav-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.bg-active {
+  background-color: #F4F4F5; 
+}
+
+form input:focus-visible{
+  border: 1px solid black !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  color: #9ca3af; /* Tailwind's gray-400 */
+  opacity: 1; /* Ensures the color is fully visible */
+}
+
+input:focus::placeholder {
+  color: #6b7280; /* Tailwind's gray-600 for focused state */
+}

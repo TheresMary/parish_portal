@@ -1,0 +1,54 @@
+{% extends 'layouts/base_list.html' %} {% load static %} {% block heading %}
+Priest {% endblock %}
+
+<!-- Custom Search Button -->
+{% block table-search %}
+<div class="custom-search-container"></div>
+{% endblock %}
+
+<!-- Add new Button -->
+{% block addbutton %}
+<a href="{% url 'priest:priest.create' %}" class="btn-blue flex">
+  <span class="mr-2">Add New Priest</span>
+  <svg class="w-5 h-5 text-white">
+    <use href="{% static 'images/plus_icon.svg' %}#plusIcon"></use>
+  </svg>
+</a>
+{% endblock %}
+
+<!-- Total count -->
+{% block total-count %}
+<div class="font-medium text-base">
+  Total Priests<span id="total-group"> ({{ groups_count }})</span>
+</div>
+{% endblock %}
+
+<!-- Table actions -->
+{% block table-actions %} {% include 'layouts/partials/table-actions.html' %} {% endblock %}
+
+<!-- Table -->
+<div class="mt-4">
+  {% block table %} {% include 'admin/priest/partials/table.html' %} {% endblock %}
+</div>
+
+<!-- Selected Rows Count -->
+{% block selected %} <span id="selectedCount">0 row(s) selected.</span> {%endblock %} {% block script %}
+<script>
+  var api_config = {
+    datatable: "{% url 'organization:groups:load.groups.datatable' %}",
+    csrfmiddlewaretoken: "{{ csrf_token }}",
+    delete_records: "{% url 'organization:groups:groups.records.destroy' %}",
+    edit_url: "{% url 'organization:groups:groups.update' '0' %}",
+    group_view_profile: "{% url 'organization:groups:groups.profile' '0' %}",
+    status_change: "{% url 'organization:groups:group.status.change' %}",
+    edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
+    delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
+    search_icon: "{% static 'images/search_icon.svg' %}",
+    from_org: false,
+    item: "Group",
+  };
+</script>
+
+<script src="{% static 'js/custom/pages/superadmin/organization/groups/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

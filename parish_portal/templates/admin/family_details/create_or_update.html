@@ -1,0 +1,142 @@
+{% extends 'layouts/base_create.html' %}
+{% load static %}
+
+{% block heading %}
+{{ checklist.id|yesno:"Edit Family,Add Family" }}
+{% endblock %}
+
+{% block sub-heading %}
+{{ checklist.id|yesno:"Edit Family Details,Add Family Details" }}
+{% endblock %}
+
+{% block form %}
+<form class="bg-white px-6 lg:pr-56 py-10" id="create-or-update-checklist-form" data-redirect-url="">
+    <input type="hidden" name="checklist_id" value="{{ checklist.id }}">
+    <!-- Form Fields -->
+    <div class="flex flex-col gap-y-10 gap-x-6 mb-4">
+        <!-- Basic Info -->
+        <div class="flex justify-between gap-x-20">
+            <div class="basis-1/5">
+                <h2 class="text-zinc-800 font-medium text-base mb-4">Family Details</h2>
+            </div>
+            <div class="basis-4/5 w-full">
+                <div class="fv-row mb-6">
+                    <label for="checklist_name" class="block text-gray-800 font-normal text-sm mb-1">Family Name
+                        <span class="required-asterisk">*</span></label>
+                    <input type="text" id="checklist_name" value="{{ checklist.name|default_if_none:'' }}" {% if not checklist.id %}autofocus {% endif %} name="checklist_name"
+                        class="w-full border-gray-300 border rounded px-3 py-2" placeholder="Enter Family Name">
+                </div>
+                <div class="w-full flex gap-x-4">
+                    <div class="fv-row mb-6 w-1/2">
+                        <label for="parish" class="block text-gray-800 font-normal text-sm mb-1">Select Parish<span
+                                class="required-asterisk">*</span></label>
+                        <select id="role_category" name="role_category"
+                            class="w-full border-gray-300 border rounded px-3 py-2 bg-white">
+
+                            <option value="">Select Parish</option>
+                            <option value="RDA">Parish 1</option>
+                            <option value="DFI">Parish 2</option>
+                            <option value="OM">Parish 3</option>
+
+                        </select>
+                    </div>
+                    <div class="fv-row mb-6 w-1/2">
+                        <label for="parish" class="block text-gray-800 font-normal text-sm mb-1">Select Family Unit<span
+                            class="required-asterisk">*</span></label>
+                        <select id="role_category" name="role_category"
+                        class="w-full border-gray-300 border rounded px-3 py-2 bg-white">
+
+                        <option value="">Select Family Unit</option>
+                        <option value="RDA">Family Unit 1</option>
+                        <option value="DFI">Family Unit 2</option>
+                        <option value="OM">Family Unit 3</option>
+
+                    </select>
+                    </div>
+                </div>
+                <div class="w-full flex gap-x-4">
+                    <div class="fv-row mb-6 w-1/2">
+                        <label for="checklist_name" class="block text-gray-800 font-normal text-sm mb-1">Number of
+                            family members
+                            <span class="required-asterisk">*</span></label>
+                        <input type="text" id="checklist_name" value="{{ checklist.name|default_if_none:'' }}" 
+                            {% if not checklist.id %}autofocus {% endif %} name="checklist_name"
+                            class="w-full border-gray-300 border rounded px-3 py-2" placeholder="Enter number">
+                    </div>
+                    <div class="fv-row mb-6 w-1/2">
+                        <label for="checklist_name" class="block text-gray-800 font-normal text-sm mb-1">Contact Number
+                            <span class="required-asterisk">*</span></label>
+                        <input type="text" id="checklist_name" value="{{ checklist.name|default_if_none:'' }}" 
+                            {% if not checklist.id %}autofocus {% endif %} name="checklist_name"
+                            class="w-full border-gray-300 border rounded px-3 py-2" placeholder="Enter contact number">
+                    </div>
+                </div>
+                <div class="fv-row mb-6">
+                    <label for="checklist_name" class="block text-gray-800 font-normal text-sm mb-1">Address
+                        <span class="required-asterisk">*</span></label>
+                    <input type="text" id="checklist_name" value="{{ checklist.name|default_if_none:'' }}" 
+                        {% if not checklist.id %}autofocus {% endif %} name="checklist_name"
+                        class="w-full border-gray-300 border rounded px-3 py-2" placeholder="Enter Address">
+                </div>
+                <div class="fv-row">
+                    <label for="description" class="block text-gray-800 font-normal text-sm mb-1">Family Remarks</label>
+                    <textarea id="description" rows="4" name="description"
+                        class="w-full border-gray-300 border rounded px-3 py-2"
+                        placeholder="Enter remarks">{{ checklist.description|default_if_none:'' }}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="py-12 border-b border-zinc-100">
+            <h2 class="text-zinc-800 font-semibold text-base">Member Details</h2>
+            <button id="add-question" type="button" class="btn-blue mt-9" onclick="addQuestion(this)">
+                Add Member
+                <svg class="w-5 h-5 ml-2">
+                    <use href="{% static 'images/plus_icon.svg' %}#plusIcon"></use>
+                </svg>
+            </button>
+        </div>
+        <!-- Visibility & Status -->
+        <div class="flex gap-x-20">
+            <div class="basis-2/5 lg:basis-1/5">
+                <h2 class="text-zinc-800 font-medium text-base mb-2 lg:mb-4">Visibility</h2>
+            </div>
+            <div class="flex items-center mb-4 basis-4/5">
+                <label for="status" class="block text-zinc-950 font-normal text-sm mr-6">Mark Status as Active</label>
+                <input type="checkbox" id="status" class="toggle-checkbox hidden">
+                <label for="status" class="toggle-label">
+                    <div class="toggle-inner"></div>
+                    <div class="toggle-switch"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- Buttons -->
+    <div class="flex justify-start gap-4 mt-14 pr-56">
+        <a href="" class="btn-blue-outlined">
+            Cancel
+        </a>
+        <button id="create-or-update-checklist-submit" type="button" class="btn-blue">
+            {{ checklist.id|yesno:"Update Family,Save Family" }}
+        </button>
+    </div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    const detailsSection = "{{ checklist_questions|escapejs|safe }}";
+    const checklist_questions = detailsSection ? JSON.parse(detailsSection) : [];
+
+    var api_config = {
+        "create_or_update_from": "{% url 'observations:checklist:checklist.create' %}",
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "plus_icon": "{% static 'images/plus_icon.svg' %}#plusIcon",
+        "delete_icon": "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
+        "checklist_id": "{{ checklist.id }}",
+        "checklist_questions": checklist_questions
+    }
+</script>
+<script
+    src="{% static 'js/custom/pages/superadmin/observations/checklist/create-or-update.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

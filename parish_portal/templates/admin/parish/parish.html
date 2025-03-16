@@ -1,0 +1,52 @@
+{% extends 'layouts/base_list.html' %} {% load static %} {% block heading %}
+Parish {% endblock %}
+
+<!-- Custom Search Button -->
+{% block table-search %}
+<div class="roles-datatable-search-container"></div>
+{% endblock %}
+
+<!-- Add new Button -->
+{% block addbutton %}
+<a href="{% url 'parish:parish.create' %}" class="btn-blue flex">
+  <span class="mr-2">Add New Parish</span>
+  <svg class="w-5 h-5 text-white">
+    <use href="{% static 'images/plus_icon.svg' %}#plusIcon"></use>
+  </svg>
+</a>
+{% endblock %}
+
+<!-- Total count -->
+{% block total-count %}
+<div class="font-medium text-base">
+  Total Parish <span id="roles-datatable-total"></span>
+</div>
+{% endblock %}
+
+<!-- Table actions -->
+{% block table-actions %} {% include 'layouts/partials/table-actions.html' %} {% endblock %}
+
+<!-- Table -->
+<div class="mt-4">
+  {% block table %} {% include 'admin/parish/partials/table.html' %} {% endblock %}
+</div>
+
+{% block script %}
+<script>
+  var api_config = {
+    datatable: "{% url 'users:load.roles.datatable' %}",
+    csrfmiddlewaretoken: "{{ csrf_token }}",
+    delete_records: "{% url 'users:roles.records.destroy' %}",
+    edit_url: "{% url 'users:roles.update' '0' %}",
+    view_profile: "{% url 'users:roles.profile' '0' %}",
+    status_change: "{% url 'users:roles.status.change' %}",
+    edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
+    delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
+    search_icon: "{% static 'images/search_icon.svg' %}",
+    item: "Role",
+  };
+</script>
+
+<script src="{% static 'js/custom/pages/superadmin/users/roles/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}

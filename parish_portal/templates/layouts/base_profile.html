@@ -1,0 +1,30 @@
+{% extends 'layouts/apps.html' %}
+{% load static %}
+
+<!-- Profile page layout -->
+{% block content %}
+<!-- Breadcrumb -->
+{% include 'layouts/partials/breadcrumbs.html' %}
+
+<h1>
+    {% block heading %} {% endblock %}
+</h1>
+
+<div class="my-6 rounded-md border border-[#eeeded] overflow-hidden">
+    <div class="flex justify-between items-center bg-gray-100 pl-8 pr-2.5 py-2.5">
+        <h2 class="text-zinc-500">{% block sub-heading %} {% endblock %}</h2>
+        <div class="flex gap-x-4">
+            <!-- Delete & Edit Buttons -->
+            {% block buttons %} {% endblock %}
+
+        </div>
+    </div>
+    <!-- Profile section -->
+    <div class="bg-white px-8 py-14 flex flex-col gap-y-14">
+        <div class="grid grid-cols-2 gap-x-8 lg:gap-x-24 max-w-4xl">
+            {% block row1 %} {% endblock %}
+        </div>
+        {% block row2 %} {% endblock %}
+    </div>
+</div>
+{% endblock content %}

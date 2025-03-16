@@ -1,0 +1,28 @@
+{% load static %}
+
+<dialog
+  id="{% block modal-id %}{% endblock  %}"
+  class="w-[456px] h-[609px] rounded-md overflow-hidden"
+>
+  <div
+    class="px-9 py-5 w-full flex items-center justify-between bg-zinc-100 border-b border-slate-200"
+  >
+    <h3 class="text-zinc-950 text-base font-medium">
+      {% block title %}{% endblock title %}
+    </h3>
+    <button
+      class="w-4 h-4 flex justify-center items-center cursor-pointer"
+      onclick="closeModal(event)"
+    >
+      <img src="{% static 'images/close_button.png' %}" alt="Close Icon" />
+    </button>
+  </div>
+  {% block body %}{% endblock body %}
+</dialog>
+
+<script>
+  function closeModal(e) {
+    e.target.closest("dialog").close();
+  }
+</script>
+{% block script %}{% endblock script %}
