@@ -1,0 +1,62 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.swp
+
+# Django
+*.log
+*.pot
+*.mo
+*.py[cod]
+db.sqlite3
+# Ignore database files for Django
+
+# Migrations
+**/migrations/*
+!**/migrations/__init__.py
+!**/**/migrations/__init__.py
+!**/**/**/migrations/__init__.py
+!**/**/**/**/migrations/__init__.py
+
+
+
+
+# Environment variables
+.env
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Node.js (if using front-end assets in Django project)
+node_modules/
+
+# IDEs
+.vscode/
+.idea/
+
+# Byte-compiled files and compiled binaries
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+
+# Other ignored files
+*.bak
+*.backup
+.DS_Store
+Thumbs.db
+uploads/
