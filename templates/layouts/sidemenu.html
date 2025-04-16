@@ -41,10 +41,10 @@
       </button>
       <div id="organizationMenu" class="hidden w-full flex-col space-y-3 pl-8 mt-4 font-medium text-bayouxBlue">
         <a href="{% url 'priest:priest.create' %}"
-          class="block p-2 rounded hover:bg-blue-100 {% if request.resolver_match.url_name == 'groups.create_no_id' %}active{% endif %}">Add
+          class="block p-2 rounded hover:bg-blue-100 {% if request.resolver_match.url_name == 'priest.create' %}active{% endif %}">Add
           Priest</a>
-        <a href="{% url 'priest:priest.list' %}"
-          class="block p-2 rounded hover:bg-blue-100 {% if request.resolver_match.url_name == 'groups.index' %}active{% endif %}">Priest
+        <a href="{% url 'priest:priest.index' %}"
+          class="block p-2 rounded hover:bg-blue-100 {% if request.resolver_match.url_name == 'priest.index' %}active{% endif %}">Priest
           List</a>
       </div>
     </div>
