@@ -1,0 +1,63 @@
+{% load static %}
+<!-- Header Section -->
+<div
+  class="flex items-center justify-between lg:justify-end sticky top-0 px-7 lg:px-10 bg-white min-h-[90px] border-b border-b-gray-light z-20"
+>
+  <div id="hamburger-menu" class="hamburger-menu lg:hidden">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6 text-gray-400"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+      />
+    </svg>
+  </div>
+  <div class="user-info flex">
+    <div
+      id="user-avatar-dropdown"
+      class="user-info-wrapper relative flex items-center mr-3 rounded-md py-2 px-3 hover:bg-zinc-100 hover:cursor-pointer"
+    >
+      <!-- User Icon -->
+      <img class="" src="{% static 'images/user_icon.svg' %}" alt="User Icon" />
+      <!-- User Name -->
+      <div class="flex flex-col mx-3">
+        <p class="text-zinc-950 font-medium text-sm">John Doe</p>
+        <span class="text-zinc-500 font-normal text-xs">Admin</span>
+      </div>
+      <!-- User dropdown -->
+      <img
+        class="self-start cursor-pointer"
+        id="header-dropdown-icon"
+        src="{% static 'images/layout_dropdown_arrow.svg' %}"
+        alt="dropdown arrow"
+      />
+      <!-- Dropdown menu -->
+      <a
+        href=""
+        class="absolute rounded border border-zinc-200 flex hidden items-center min-w-[171] pl-5 py-3 z-10 mt-2 top-[54] left-0 w-40 bg-white shadow-lg hover:bg-gray-100"
+        id="header-dropdown"
+        role="menu"
+      >
+        <img
+          src="{% static 'images/log_out_icon.svg' %}"
+          alt="Log out Icon"
+          class=""
+        />
+        <div class="py-1" role="none">
+          <p class="block px-2 text-sm" role="menuitem">Log out</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% block script %}
+<script src="{% static 'js/custom/pages/layout/header.js' %}?time={% now 'h:i:s' %}"></script>
+{% endblock script %}
