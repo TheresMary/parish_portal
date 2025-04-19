@@ -15,7 +15,7 @@ var MCSaveUser = function () {
                 fields: {
                     'priest_name'  : createFieldRequiredValidator(),
                     'priest_contact_number': createFieldRequiredValidator(),
-                    'email': createFieldRequiredValidator(),
+                    'priest_email': createFieldRequiredValidator(),
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -41,11 +41,10 @@ var MCSaveUser = function () {
 
                     const formData = new FormData();
                     var selectedStatus = document.getElementById('status').checked;
-                    formData.append('group_id', document.querySelector('[name="group_id"]').value);
-                    formData.append('group_name', document.querySelector('[name="group_name"]').value);
-                    formData.append('organization', document.querySelector('[name="organization"]').value);
-                    formData.append('description', document.querySelector('[name="description"]').value);
-                    formData.append('group_status', selectedStatus);
+                    formData.append('priest_id', document.querySelector('[name="priest_id"]').value);
+                    formData.append('priest_name', document.querySelector('[name="priest_name"]').value);
+                    formData.append('priest_email', document.querySelector('[name="priest_email"]').value);
+                    formData.append('priest_status', selectedStatus);
 
                     submitButton.setAttribute('data-kt-indicator', 'on');
                     submitButton.disabled = true;

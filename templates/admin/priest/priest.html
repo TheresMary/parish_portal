@@ -19,7 +19,7 @@ Priest {% endblock %}
 <!-- Total count -->
 {% block total-count %}
 <div class="font-medium text-base">
-  Total Priests<span id="total-group"> ({{ groups_count }})</span>
+  Total Priests<span id="total-priest"> ({{ priest_count }})</span>
 </div>
 {% endblock %}
 
@@ -35,20 +35,20 @@ Priest {% endblock %}
 {% block selected %} <span id="selectedCount">0 row(s) selected.</span> {%endblock %} {% block script %}
 <script>
   var api_config = {
-    datatable: "{% url 'organization:groups:load.groups.datatable' %}",
+    datatable: "{% url 'organization:priest:load.priest.datatable' %}",
     csrfmiddlewaretoken: "{{ csrf_token }}",
-    delete_records: "{% url 'organization:groups:groups.records.destroy' %}",
-    edit_url: "{% url 'organization:groups:groups.update' '0' %}",
-    group_view_profile: "{% url 'organization:groups:groups.profile' '0' %}",
-    status_change: "{% url 'organization:groups:group.status.change' %}",
+    delete_records: "{% url 'organization:priest:priest.records.destroy' %}",
+    edit_url: "{% url 'organization:priest:priest.update' '0' %}",
+    priest_view_profile: "{% url 'organization:priest:priest.profile' '0' %}",
+    status_change: "{% url 'organization:priest:priest.status.change' %}",
     edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
     delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
     search_icon: "{% static 'images/search_icon.svg' %}",
     from_org: false,
-    item: "Group",
+    item: "Priest",
   };
 </script>
 
-<script src="{% static 'js/custom/pages/superadmin/organization/groups/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/superadmin/organization/priest/datatable.js' %}?time={% now 'h:i:s' %}"></script>
 <script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
 {% endblock script %}

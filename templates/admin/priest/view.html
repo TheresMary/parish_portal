@@ -1,5 +1,5 @@
 {% extends 'layouts/base_profile.html' %} {% load static %} {% block heading %}
-Group {% endblock %} {% block sub-heading %} Group details {% endblock %} {%
+Priest {% endblock %} {% block sub-heading %} Priest details {% endblock %} {%
 block buttons %}
 <button
   type="button"
@@ -24,8 +24,8 @@ block buttons %}
   </svg>
 </button>
 <a
-  id="edit-groups-link"
-  href="{% url 'organization:groups:groups.update' encyption.encrypt_id %}"
+  id="edit-priest-link"
+  href="{% url 'organization:priest:priest.update' encyption.encrypt_id %}"
   class="btn-blue"
 >
   <span class="mr-2.5">Edit</span>
@@ -55,21 +55,21 @@ block buttons %}
 {% endblock %} {% block row1 %}
 <div class="flex flex-col gap-y-14">
   <div class="grid gap-y-3">
-    <h3 class="text-slate-500 text-sm font-medium">Group Name:</h3>
+    <h3 class="text-slate-500 text-sm font-medium">Priest Name:</h3>
     <p class="text-zinc-950 text-sm">
-      {{ group.group_name|default_if_none:'' }}
+      {{ priest.priest_name|default_if_none:'' }}
     </p>
   </div>
   <div class="grid gap-y-3">
     <h3 class="text-slate-500 text-sm font-medium">Organization:</h3>
     <p class="text-zinc-950 text-sm">
-      {{ group.organization.organization_name|default_if_none:'' }}
+      {{ priest.organization.organization_name|default_if_none:'' }}
     </p>
   </div>
   <div class="grid gap-y-3">
     <h3 class="text-slate-500 text-sm font-medium">Status:</h3>
     <p class="text-zinc-950 text-sm">
-      {% if group.status == 'Active' %} Active {% else %} Inactive {% endif %}
+      {% if priest.status == 'Active' %} Active {% else %} Inactive {% endif %}
     </p>
   </div>
 </div>
@@ -77,7 +77,7 @@ block buttons %}
   <div class="grid gap-y-3">
     <h3 class="text-slate-500 text-sm font-medium">Description:</h3>
     <p class="text-zinc-950 text-sm">
-      {{ group.description|default_if_none:'' }}
+      {{ priest.description|default_if_none:'' }}
     </p>
   </div>
 </div>
@@ -86,15 +86,15 @@ block buttons %}
 <script>
   var api_config = {
     csrfmiddlewaretoken: "{{ csrf_token }}",
-    redirection_url: "{% url 'organization:groups:groups.index' %}",
-    delete_records: "{% url 'organization:groups:groups.records.destroy' %}",
-    record_id: "{{ group.id }}",
-    edit_url: "{% url 'organization:groups:groups.update' '0' %}",
+    redirection_url: "{% url 'organization:priest:priest.index' %}",
+    delete_records: "{% url 'organization:priest:priest.records.destroy' %}",
+    record_id: "{{ priest.id }}",
+    edit_url: "{% url 'organization:priest:priest.update' '0' %}",
     encrypt_id: "{{ encyption.encrypt_id }}",
     organization_id: "{{ organization_id }}",
   };
 </script>
 
-<script src="{% static 'js/custom/pages/superadmin/organization/groups/view-profile.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/superadmin/organization/priest/view-profile.js' %}?time={% now 'h:i:s' %}"></script>
 
 {% endblock script %}

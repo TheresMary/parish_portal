@@ -58,7 +58,7 @@ class PriestCreateOrUpdateView(View,BreadcrumbMixin):
     def __init__(self, **kwargs):
         self.response_format                = {"status": 200, "message": "", "error": ""}
         self.context                        = {"breadcrumbs": []}
-        self.context['title']               = 'Groups'
+        self.context['title']               = 'Priest'
         self.action                         = "Create"
         self.template                       = 'admin/priest/create_or_update.html'
 
