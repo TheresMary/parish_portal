@@ -35,12 +35,12 @@ Priest {% endblock %}
 {% block selected %} <span id="selectedCount">0 row(s) selected.</span> {%endblock %} {% block script %}
 <script>
   var api_config = {
-    datatable: "{% url 'organization:priest:load.priest.datatable' %}",
+    datatable: "{% url 'priest:load.priest.datatable' %}",
     csrfmiddlewaretoken: "{{ csrf_token }}",
-    delete_records: "{% url 'organization:priest:priest.records.destroy' %}",
-    edit_url: "{% url 'organization:priest:priest.update' '0' %}",
-    priest_view_profile: "{% url 'organization:priest:priest.profile' '0' %}",
-    status_change: "{% url 'organization:priest:priest.status.change' %}",
+    delete_records: "{% url 'priest:priest.records.destroy' %}",
+    edit_url: "{% url 'priest:priest.update' '0' %}",
+    priest_view_profile: "{% url 'priest:priest.profile' '0' %}",
+    status_change: "{% url 'priest:priest.status.change' %}",
     edit_icon: "{% static 'images/edit_icon.svg' %}#EditIcon",
     delete_icon: "{% static 'images/delete_icon.svg'%}#DeleteIcon ",
     search_icon: "{% static 'images/search_icon.svg' %}",
@@ -49,6 +49,6 @@ Priest {% endblock %}
   };
 </script>
 
-<script src="{% static 'js/custom/pages/superadmin/organization/priest/datatable.js' %}?time={% now 'h:i:s' %}"></script>
+<script src="{% static 'js/custom/pages/admin/priest/datatable.js' %}?time={% now 'h:i:s' %}"></script>
 <script src="{% static 'js/custom/pages/superadmin/datatable_actions.js' %}?time={% now 'h:i:s' %}"></script>
 {% endblock script %}

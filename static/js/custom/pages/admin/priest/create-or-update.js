@@ -43,6 +43,7 @@ var MCSaveUser = function () {
                     var selectedStatus = document.getElementById('status').checked;
                     formData.append('priest_id', document.querySelector('[name="priest_id"]').value);
                     formData.append('priest_name', document.querySelector('[name="priest_name"]').value);
+                    formData.append('priest_contact_number', document.querySelector('[name="priest_contact_number"]').value);
                     formData.append('priest_email', document.querySelector('[name="priest_email"]').value);
                     formData.append('priest_status', selectedStatus);
 

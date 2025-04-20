@@ -34,7 +34,7 @@ class PriestView(View,BreadcrumbMixin):
 
 class LoadPriestDatatable(BaseDatatableView):
     model = Priest.objects.all()
-    order_columns = ['id','name','status','created_date']
+    order_columns = ['id','name','email','contact_number','status','created_date']
 
     def filter_queryset(self, qs):
         search = self.request.POST.get('search[value]', None)
@@ -78,31 +78,20 @@ class PriestCreateOrUpdateView(View,BreadcrumbMixin):
     def post(self, request, *args, **kwargs):
 
         try:
-            category_id               = request.POST.get('observation_category_id', None)
-            category_name             = sub(r' {2,}', ' ', request.POST.get('category_name', None))
-            if category_id:
+            priest_id               = request.POST.get('priest_id', None)
+            if priest_id:
                 self.action = 'Updated'
-                observationcategory_instance = get_object_or_none(Priest, id=category_id)
+                instance = get_object_or_none(Priest, id=priest_id)
             else:
                 self.action = 'Created'
-                observationcategory_instance = Priest()
-
-            category_id       = category_id if category_id not in [None,''] else 0
-            observation_category_exist    = Priest.objects.filter( Q(name=category_name) & ~Q(id=category_id)).exists()
-
-            if observation_category_exist:
-                self.response_format['status'] = 409
-                self.response_format['message'] = f"Observation category '{category_name}' already exists "
-                messages.error(request, self.response_format['message'])
-                return JsonResponse(self.response_format, status=409)
-
+                instance = Priest()
 
             with transaction.atomic():
-                observationcategory_instance.name           = category_name
-                observationcategory_instance.description    = request.POST.get('description',None)
-                observationcategory_instance.status         = 'Active' if request.POST.get('status',None) == "true" else 'Inactive'
-                observationcategory_instance.created_by     = request.user
-                observationcategory_instance.save()
+                instance.priest_name    = request.POST.get('priest_name', None)
+                instance.email          = request.POST.get('priest_email',None)
+                instance.contact_number = request.POST.get('priest_contact_number',None)
+                instance.is_active      = request.POST.get('status',None)
+                instance.save()
 
             self.response_format['status'] = 200
             self.response_format['message'] = f"Data Successfully {self.action}"
