@@ -91,8 +91,7 @@ var DatatablesServerSide = function() {
                                 <div class="font-normal text-sm text-zinc-800">${data}</div>
                             </a>`;
                     }
-                },
-        
+                },        
                 {
                     searchable: false,
                     orderable: false,
@@ -228,58 +227,12 @@ var DatatablesServerSide = function() {
             });
     };
 
-    var handleCountryWiseFilter = () => {
-        const countrySelector = document.querySelectorAll('[data-organization-filter="country_wise"]');
-
-        const getSelectedCountryIds = () => {
-            let selectedCountryIds = Array.from(countrySelector)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);     
-            let searchValue = selectedCountryIds.length > 0 ? selectedCountryIds.join(',') : '';
-            dt.column(4).search(searchValue, true, false).draw();
-        };
-
-        countrySelector.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                getSelectedCountryIds();
-            });
-        });
-
-        document.querySelector('button[data-organization-filter="clearCountry"]').addEventListener("click", function () {
-            countrySelector.forEach((checkbox) => {
-                checkbox.checked = false;
-            });
-
-            let searchValue = '';
-            dt.column(4).search(searchValue).draw();
-        });
-
-        const searchInput = document.getElementById('countrySearch');
-        const countryCheckboxes = document.querySelectorAll('.country-checkbox');
-    
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-            
-            countryCheckboxes.forEach(checkbox => {
-                const countryLabel = checkbox.nextElementSibling;
-                const countryName = countryLabel.textContent.toLowerCase();
-                
-                if (searchTerm === '' || countryName.includes(searchTerm)) {
-                    checkbox.closest('div').style.display = 'flex';
-                } else {
-                    checkbox.closest('div').style.display = 'none';
-                }
-            });
-        });
-    };
-
     // Public methods
     return {
         init: function () {
             initDatatable();
             handleDatatableStatusFilter(dt, 3)
             handleDatatableSort(dt,5,0)
-            handleCountryWiseFilter();
         }
     }
 }();
