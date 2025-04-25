@@ -6,7 +6,7 @@ class Priest(models.Model):
     priest_name       = models.CharField(_('Priest Name'), max_length=255,null=True, blank=True,db_index=True)
     contact_number    = models.CharField(_('Contact Number'), max_length=255,null=True, blank=True)
     email             = models.EmailField(_('Email'), max_length=255,null=True, blank=True)
-    is_active        = models.BooleanField(_('Is Active'), default=True)
+    is_active         = models.BooleanField(_('Is Active'), default=True)
 
     def __str__(self):
         return self.priest_name

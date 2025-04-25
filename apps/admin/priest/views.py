@@ -90,7 +90,7 @@ class PriestCreateOrUpdateView(View,BreadcrumbMixin):
                 instance.priest_name    = request.POST.get('priest_name', None)
                 instance.email          = request.POST.get('priest_email',None)
                 instance.contact_number = request.POST.get('priest_contact_number',None)
-                instance.is_active      = request.POST.get('status',None)
+                instance.is_active = bool(request.POST.get('status'))
                 instance.save()
 
             self.response_format['status'] = 200
